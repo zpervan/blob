@@ -1,0 +1,12 @@
+[package]
+name = "image_processing_exercise"
+version = "0.1.0"
+edition = "2021"
+authors = ["Zvonimir Pervan <z.pervan65@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+image = "0.21.1"
+num-complex = "0.2.1"
+clap = { version = "3.1.6", features = ["derive"] }
