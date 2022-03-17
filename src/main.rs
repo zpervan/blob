@@ -16,7 +16,7 @@ struct Args {
 
     /// Output file path
     #[clap(short, long)]
-    outfile: String,
+    outfile: Option<String>,
 }
 
 fn main() {
@@ -24,13 +24,25 @@ fn main() {
 
     match arguments.method.as_str() {
         "blur" => {
-            lib::blur(arguments.infile.unwrap(), arguments.outfile);
-        }
+            lib::blur(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        },
+        "brighten" => {
+            lib::brighten(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        },
+        "crop" => {
+            lib::crop(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        },
+        "rotate" => {
+            lib::rotate(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        },
+        "invert" => {
+            lib::invert(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        },
         "grayscale" => {
-            lib::grayscale(arguments.infile.unwrap(), arguments.outfile);
+            lib::grayscale(arguments.infile.unwrap(), arguments.outfile.unwrap());
         }
         "fractal" => {
-            lib::fractal(arguments.outfile);
+            lib::fractal(arguments.outfile.unwrap());
         }
         _ => {
             println!("Couldn't find method. Exiting..");

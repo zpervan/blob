@@ -4,10 +4,33 @@ pub fn blur(infile: String, outfile: String) {
     blurred_image.save(outfile).expect("Failed writing OUTFILE.");
 }
 
+pub fn brighten(infile: String, outfile: String) {
+    let input_image = image::open(infile).expect("Failed to open INFILE.");
+    let brighten_image = input_image.brighten(50);
+    brighten_image.save(outfile).expect("Failed writing OUTFILE.");
+}
+
+pub fn crop(infile: String, outfile: String) {
+    let mut input_image = image::open(infile).expect("Failed to open INFILE.");
+    let cropped_image = input_image.crop(50, 50, 250, 250);
+    cropped_image.save(outfile).expect("Failed writing OUTFILE.");
+}
+
+pub fn rotate(infile: String, outfile: String) {
+    let input_image = image::open(infile).expect("Failed to open INFILE.");
+    let rotated_image = input_image.rotate180();
+    rotated_image.save(outfile).expect("Failed writing OUTFILE.");
+}
+
+pub fn invert(infile: String, outfile: String) {
+    let mut input_image = image::open(infile).expect("Failed to open INFILE.");
+    input_image.invert();
+    input_image.save(outfile).expect("Expected outfile");
+}
+
 pub fn grayscale(infile: String, outfile: String) {
     let input_image = image::open(infile).expect("Failed to open INFILE.");
-    let grayscale_image = input_image.grayscale();
-    grayscale_image.save(outfile).expect("Failed writing OUTFILE.");
+    input_image.grayscale().save(outfile).expect("Failed to open OUTFILE.");
 }
 
 pub fn fractal(outfile: String) {
