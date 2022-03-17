@@ -1,3 +1,6 @@
+const DEFAULT_WIDTH: u32 = 800;
+const DEFAULT_HEIGHT: u32 = 800;
+
 pub fn blur(infile: String, outfile: String) {
     let input_image = image::open(infile).expect("Failed to open INFILE.");
     let blurred_image = input_image.blur(2.0);
@@ -33,14 +36,22 @@ pub fn grayscale(infile: String, outfile: String) {
     input_image.grayscale().save(outfile).expect("Failed to open OUTFILE.");
 }
 
+pub fn generate(outfile: String)
+{
+    let mut image_buffer = image::ImageBuffer::new(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+
+    for (x, y, pixel) in image_buffer.enumerate_pixels_mut() {
+        *pixel = image::Rgb([1, 1, 255]);
+    }
+
+    image_buffer.save(outfile).expect("Expected outfile");
+}
+
 pub fn fractal(outfile: String) {
-    let width = 800;
-    let height = 800;
+    let mut imgbuf = image::ImageBuffer::new(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-    let mut imgbuf = image::ImageBuffer::new(width, height);
-
-    let scale_x = 3.0 / width as f32;
-    let scale_y = 3.0 / height as f32;
+    let scale_x = 3.0 / DEFAULT_WIDTH as f32;
+    let scale_y = 3.0 / DEFAULT_HEIGHT as f32;
 
     // Iterate over the coordinates and pixels of the image
     for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {

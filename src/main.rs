@@ -40,7 +40,10 @@ fn main() {
         },
         "grayscale" => {
             lib::grayscale(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        }
+        },
+        "generate" => {
+            lib::generate(arguments.outfile.unwrap());
+        },
         "fractal" => {
             lib::fractal(arguments.outfile.unwrap());
         }
