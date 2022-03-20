@@ -36,12 +36,41 @@ pub fn grayscale(infile: String, outfile: String) {
     input_image.grayscale().save(outfile).expect("Failed to open OUTFILE.");
 }
 
+fn change_value(value: &mut i32, direction: &mut bool)
+{
+    if *value >= 255 {
+        *direction = true;
+    }
+
+    if *value <= 0 {
+        *direction = false;
+    }
+
+    if *direction {
+        *value += 1;
+    } else {
+        *value -= 1;
+    }
+}
+
 pub fn generate(outfile: String)
 {
     let mut image_buffer = image::ImageBuffer::new(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-    for (x, y, pixel) in image_buffer.enumerate_pixels_mut() {
-        *pixel = image::Rgb([1, 1, 255]);
+    let mut red_direction: bool = true;
+    let mut blue_direction: bool = true;
+    let mut green_direction: bool = true;
+
+    let mut red_value = 0;
+    let mut blue_value = 100;
+    let mut green_value = 200;
+
+    for (_x, _y, pixel) in image_buffer.enumerate_pixels_mut() {
+        change_value(&mut red_value, &mut red_direction);
+        change_value(&mut blue_value, &mut blue_direction);
+        change_value(&mut green_value, &mut green_direction);
+
+        *pixel = image::Rgb([red_value as u8, green_value as u8, blue_value as u8]);
     }
 
     image_buffer.save(outfile).expect("Expected outfile");
