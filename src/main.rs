@@ -44,6 +44,9 @@ fn main() {
         "generate" => {
             lib::generate(arguments.outfile.unwrap());
         },
+        "median" =>{
+            lib::median_filter(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        },
         "fractal" => {
             lib::fractal(arguments.outfile.unwrap());
         }
