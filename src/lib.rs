@@ -120,19 +120,20 @@ pub fn median_filter(infile: String, outfile: String)
             pixel_vector.reserve(window_width as usize);
 
             // Grab 5 neighbouring pixels
-            for i in -2i32..=2i32 {
+            let bot = -(half_window_width as i32);
+            let top = half_window_width as i32;
+
+            for i in bot..=top {
                 let x_signed = x as i32;
                 let x_position = (i + x_signed) as u32;
                 pixel_vector.push(input_image.get_pixel(x_position, y));
             }
 
             // Some partial selection sorting until half window width
-            let mut min_index : usize = 0;
+            for i in 0usize..=half_window_width as usize {
+                let mut min_index = i ;
 
-            for i in 0usize..half_window_width as usize {
-                min_index = i ;
-
-                for j in (i + 1)..=half_window_width {
+                for j in (i + 1)..window_width {
                     if larger_then(&pixel_vector[min_index], &pixel_vector[j]) {
                         min_index = j;
                     }
