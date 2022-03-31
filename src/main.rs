@@ -1,4 +1,6 @@
-mod lib;
+mod algorithms;
+mod image_processing;
+mod constants;
 
 use clap::Parser;
 
@@ -24,31 +26,31 @@ fn main() {
 
     match arguments.method.as_str() {
         "blur" => {
-            lib::blur(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        },
+            image_processing::pixel::blur(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        }
         "brighten" => {
-            lib::brighten(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        },
+            image_processing::pixel::brighten(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        }
         "crop" => {
-            lib::crop(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        },
+            image_processing::image::crop(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        }
         "rotate" => {
-            lib::rotate(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        },
+            image_processing::image::rotate(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        }
         "invert" => {
-            lib::invert(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        },
+            image_processing::pixel::invert(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        }
         "grayscale" => {
-            lib::grayscale(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        },
+            image_processing::pixel::grayscale(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        }
         "generate" => {
-            lib::generate(arguments.outfile.unwrap());
-        },
-        "median" =>{
-            lib::median_filter(arguments.infile.unwrap(), arguments.outfile.unwrap());
-        },
+            image_processing::generators::generate(arguments.outfile.unwrap());
+        }
+        "median" => {
+            image_processing::filters::median_filter(arguments.infile.unwrap(), arguments.outfile.unwrap());
+        }
         "fractal" => {
-            lib::fractal(arguments.outfile.unwrap());
+            image_processing::generators::fractal(arguments.outfile.unwrap());
         }
         _ => {
             println!("Couldn't find method. Exiting..");
