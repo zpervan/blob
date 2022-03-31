@@ -1,4 +1,5 @@
-# image_processing_exercise #
+# Image Processing Exercise #
+[![Ubuntu](https://github.com/zpervan/image_processing_exercise/actions/workflows/ci.yml/badge.svg)](https://github.com/zpervan/image_processing_exercise/actions/workflows/ci.yml)
 
 This repository contains image processing libraries which can be called from the terminal.
 
