@@ -3,6 +3,14 @@
 
 This repository contains image processing libraries which can be called from the terminal.
 
+## Setup ## 
+
+### Ubuntu ###
+Install the following libraries to run the project:
+```shell
+> sudo apt-get install libglib2.0-dev libgtk-3-dev
+```
+
 ## Build ##
 
 Position your terminal in the root of this project and run:
