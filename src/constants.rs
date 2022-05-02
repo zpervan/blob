@@ -1,2 +1,4 @@
 pub const DEFAULT_WIDTH: u32 = 800;
 pub const DEFAULT_HEIGHT: u32 = 800;
+pub const DEFAULT_WINDOW_WIDTH: f64 = 1024.0;
+pub const DEFAULT_WINDOW_HEIGHT: f64 = 780.0;
