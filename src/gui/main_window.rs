@@ -1,12 +1,17 @@
-use druid::widget::prelude::*;
-use druid::widget::{Flex, Label};
-use druid::{UnitPoint, WidgetExt};
+use druid::widget::Flex;
+use druid::{Data, ImageBuf, Lens, Widget, WidgetExt};
 
-pub fn build() -> impl Widget<u32> {
-    let label = Label::new("Welcome to the image processing application!");
+use crate::gui::image_widget::ImageArea;
 
-    // arrange the two widgets vertically, with some padding
+/// todo: Consider to extract this somewhere at the top
+#[derive(Clone, Data, Lens)]
+pub struct ApplicationState {
+    pub width: f64,
+    pub height: f64,
+}
+
+pub fn build() -> impl Widget<ApplicationState> {
     Flex::column()
-        .with_child(label)
-        .align_vertical(UnitPoint::CENTER)
+        .with_flex_child(ImageArea::new().center(), 1.0)
+        .padding(10.0)
 }
