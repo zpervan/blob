@@ -1,7 +1,26 @@
 use druid::widget::{Button, Flex, Label};
-use druid::{UnitPoint, Widget, WidgetExt};
+use druid::{FileDialogOptions, UnitPoint, Widget, WidgetExt};
 
 use crate::ApplicationState;
+
+fn make_general_section() -> impl Widget<ApplicationState> {
+    let load_image_options = FileDialogOptions::new()
+        .title("Open image...")
+        .button_text("Load");
+
+    Flex::column()
+        .with_child(Label::new("GENERAL"))
+        .with_child(
+            Flex::row().with_child(
+                Button::new("Load image")
+                    .on_click(move |ctx, _, _| {
+                        ctx.submit_command(druid::commands::SHOW_OPEN_PANEL.with(load_image_options.clone()))
+                    })
+                    .padding(5.0),
+            ),
+        )
+        .with_spacer(20.0)
+}
 
 fn make_filters_section() -> impl Widget<ApplicationState> {
     Flex::column()
@@ -46,6 +65,7 @@ fn make_pixel_section() -> impl Widget<ApplicationState> {
 
 pub fn make_sidebar() -> impl Widget<ApplicationState> {
     Flex::column()
+        .with_child(make_general_section())
         .with_child(make_filters_section())
         .with_child(make_generators_section())
         .with_child(make_image_section())

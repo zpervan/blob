@@ -21,7 +21,8 @@ impl ImageArea {
     }
 }
 
-fn render_image(state: &ApplicationState) -> Box<dyn Widget<ApplicationState>> {
+fn render_image(_data: &ApplicationState) -> Box<dyn Widget<ApplicationState>> {
+    /// todo: Dynamically load image into image view area
     let image_data = ImageBuf::from_data(include_bytes!("./../../assets/s_n_p_1.png")).unwrap();
 
     let mut img = Image::new(image_data).fill_mode(FillStrat::Fill);

@@ -1,4 +1,4 @@
-use crate::constants::{DEFAULT_WIDTH, DEFAULT_HEIGHT};
+use crate::constants::{DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT};
 
 fn change_value(value: &mut i32, direction: &mut bool)
 {
@@ -19,7 +19,7 @@ fn change_value(value: &mut i32, direction: &mut bool)
 
 pub fn generate(outfile: String)
 {
-    let mut image_buffer = image::ImageBuffer::new(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    let mut image_buffer = image::ImageBuffer::new(DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
 
     let mut red_direction: bool = true;
     let mut blue_direction: bool = true;
@@ -41,10 +41,10 @@ pub fn generate(outfile: String)
 }
 
 pub fn fractal(outfile: String) {
-    let mut imgbuf = image::ImageBuffer::new(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    let mut imgbuf = image::ImageBuffer::new(DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
 
-    let scale_x = 3.0 / DEFAULT_WIDTH as f32;
-    let scale_y = 3.0 / DEFAULT_HEIGHT as f32;
+    let scale_x = 3.0 / DEFAULT_IMAGE_WIDTH as f32;
+    let scale_y = 3.0 / DEFAULT_IMAGE_HEIGHT as f32;
 
     // Iterate over the coordinates and pixels of the image
     for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
