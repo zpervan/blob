@@ -1,6 +1,7 @@
 use druid::widget::{Image, SizedBox};
 use druid::widget::{prelude::*, FillStrat};
 use druid::{Color, Data, ImageBuf, WidgetExt};
+use druid::image::ImageBuffer;
 use gui::main_window::ApplicationState;
 
 use crate::gui;
@@ -21,11 +22,20 @@ impl ImageArea {
     }
 }
 
-fn render_image(_data: &ApplicationState) -> Box<dyn Widget<ApplicationState>> {
-    /// todo: Dynamically load image into image view area
-    let image_data = ImageBuf::from_data(include_bytes!("./../../assets/s_n_p_1.png")).unwrap();
+fn render_image(data: &ApplicationState) -> Box<dyn Widget<ApplicationState>> {
 
-    let mut img = Image::new(image_data).fill_mode(FillStrat::Fill);
+    let image_data;
+
+    if !data.image_path.is_empty()
+    {
+        image_data = ImageBuf::from_file(&data.image_path);
+    }
+    else
+    {
+        image_data = ImageBuf::from_data(include_bytes!("./../../assets/dyson.png"))
+    }
+
+    let mut img = Image::new(image_data.unwrap()).fill_mode(FillStrat::Fill);
     let mut image_area = SizedBox::new(img);
 
     image_area.border(Color::grey(0.6), 2.0).center().boxed()
