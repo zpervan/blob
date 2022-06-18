@@ -3,6 +3,8 @@
 
 This repository contains image processing libraries which can be called from the terminal.
 
+![AppExample](assets/app_example.png)
+
 ## Setup ## 
 
 ### Ubuntu ###
@@ -11,35 +13,16 @@ Install the following libraries to run the project:
 > sudo apt-get install libglib2.0-dev libgtk-3-dev
 ```
 
-## Build ##
-
-Position your terminal in the root of this project and run:
-```shell
-> cargo build            # Builds in debug mode
-> cargo build --release  # Builds in release mode
-```
-
 ## Run ##
 
-Via executable:
+`cargo` command:
 ```shell
-./image_processing_exercise/target/release/image_processing_exercise -m "median" -i "~/image_processing_exercise/assets/s_n_p_1.png" -o "~/image_processing_exercise/assets/result.png"
-```
-Or `cargo` command:
-```shell
-~/image_processing_exercise> cargo run -- -m "median" -i "~/image_processing_exercise/assets/s_n_p_1.png" -o "~/image_processing_exercise/assets/result.png"
+~/image_processing_exercise> cargo run --release
 ```
 
-List of available options:
-```shell
--h, --help                 Print help information
--i, --infile <INFILE>      Input file path
--m, --method <METHOD>      Image manipulation method which will be applied
--o, --outfile <OUTFILE>    Output file path
--V, --version              Print version information
-```
+## Additional ##
 
-List of available methods:
+List of available methods (for now):
 * `blur`
 * `brighten`
 * `crop`
