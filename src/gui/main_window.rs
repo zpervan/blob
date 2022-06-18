@@ -1,5 +1,5 @@
-use druid::widget::Flex;
-use druid::{AppDelegate, Command, Data, Lens, DelegateCtx, Env, Handled, Target, Widget, WidgetExt, FileInfo};
+use druid::widget::{Flex, Label};
+use druid::{AppDelegate, Command, Data, Lens, DelegateCtx, Env, Handled, Target, Widget, WidgetExt, FileInfo, WindowDesc, WindowId, WindowHandle};
 
 use crate::gui::image_area::ImageArea;
 use crate::gui::sidebar;
@@ -7,14 +7,18 @@ use crate::gui::sidebar;
 /// todo: Consider to extract this somewhere at the top
 #[derive(Clone, Data, Lens)]
 pub struct ApplicationState {
-    pub image_path: String
+    pub image_path: String,
 }
 
-pub struct Delegate;
+pub struct Delegate
+{
+    pub windows: Vec<WindowId>
+}
 
 impl AppDelegate<ApplicationState> for Delegate
 {
-    fn command(&mut self, _ctx: &mut DelegateCtx, _target: Target, cmd: &Command, data: &mut ApplicationState, _env: &Env) -> Handled {
+    fn command(&mut self, ctx: &mut DelegateCtx, _target: Target, cmd: &Command, data: &mut ApplicationState, _env: &Env) -> Handled {
+
         if let Some(file_info) = cmd.get(druid::commands::OPEN_FILE)
         {
             let image_path = file_info.path().to_str().unwrap().to_string();
@@ -28,8 +32,29 @@ impl AppDelegate<ApplicationState> for Delegate
             }
 
             return Handled::Yes;
-        } else {
-            Handled::No
+        }
+
+        if let Some(_about_window) = cmd.get(druid::commands::SHOW_ABOUT)
+        {
+            /// todo: Allow showing about window only once.
+            /// Attention: WindowId is private and cannot be assigned as a "about_window_id" in ApplicationState
+            ctx.new_window(show_about());
+
+            return Handled::Yes;
+        }
+
+        Handled::No
+    }
+
+    fn window_added(&mut self, id: WindowId, _handle: WindowHandle, _data: &mut ApplicationState, _env: &Env, _ctx: &mut DelegateCtx) {
+        println!("Window added, id: {:?}", id);
+        self.windows.push(id);
+    }
+
+    fn window_removed(&mut self, id: WindowId, _data: &mut ApplicationState, _env: &Env, _ctx: &mut DelegateCtx) {
+        println!("Window removed, id: {:?}", id);
+        if let Some(pos) = self.windows.iter().position(|x| *x == id) {
+            self.windows.remove(pos);
         }
     }
 }
@@ -39,4 +64,13 @@ pub fn build() -> impl Widget<ApplicationState> {
         .with_child(sidebar::make())
         .with_spacer(20.0)
         .with_flex_child(ImageArea::new().center(), 1.0)
+}
+
+fn show_about() -> WindowDesc<ApplicationState> {
+    let label = Label::new("This is an application for image processing thingies.")
+        .with_text_size(20.0);
+
+    let about_content = Flex::column().with_child(label);
+
+    WindowDesc::new(about_content).title("About").window_size((250.0, 250.0))
 }

@@ -1,6 +1,6 @@
 use crate::gui::main_window::ApplicationState;
-use druid::{Data, Env, Menu, WindowId};
-use std::borrow::BorrowMut;
+use druid::{Data, Env, Menu, MenuItem, WindowId};
+use druid::menu::MenuEntry;
 
 pub fn make<T: Data>(_window: Option<WindowId>, _data: &ApplicationState, _env: &Env) -> Menu<T> {
     let mut base = Menu::empty();
@@ -13,7 +13,8 @@ fn file<T: Data>() -> Menu<T> {
         .entry(druid::platform_menus::win::file::save_as())
 }
 
-/// todo: Add about dialog
 fn application<T: Data>() -> Menu<T> {
-    Menu::new("Application").entry(druid::platform_menus::win::file::exit())
+    Menu::new("Application")
+        .entry(druid::platform_menus::win::file::exit())
+        .entry(MenuItem::new("About").command(druid::commands::SHOW_ABOUT))
 }

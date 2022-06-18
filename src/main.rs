@@ -8,6 +8,7 @@ use gui::main_window::{ApplicationState, Delegate};
 use gui::menu_bar;
 
 use std::string::String;
+use druid::Target::Window;
 
 fn main() {
     let main_window = WindowDesc::new(gui::main_window::build())
@@ -20,8 +21,14 @@ fn main() {
         image_path: String::new(),
     };
 
+
+    let application_delegate = Delegate
+    {
+        windows: Vec::new()
+    };
+
     AppLauncher::with_window(main_window)
-        .delegate(Delegate)
+        .delegate(application_delegate)
         .log_to_console()
         .launch(application_state)
         .expect("Failed to launch the application");
