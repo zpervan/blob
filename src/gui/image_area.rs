@@ -2,9 +2,8 @@ use druid::widget::{Image, SizedBox};
 use druid::widget::{prelude::*, FillStrat};
 use druid::{Color, Data, ImageBuf, WidgetExt};
 use druid::image::ImageBuffer;
-use gui::main_window::ApplicationState;
 
-use crate::gui;
+use crate::gui::main_window::ApplicationState;
 
 pub struct ImageArea {
     inner: Box<dyn Widget<ApplicationState>>,

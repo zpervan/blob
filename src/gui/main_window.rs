@@ -36,7 +36,7 @@ impl AppDelegate<ApplicationState> for Delegate
 
 pub fn build() -> impl Widget<ApplicationState> {
     Flex::row()
-        .with_child(sidebar::make_sidebar())
+        .with_child(sidebar::make())
         .with_spacer(20.0)
         .with_flex_child(ImageArea::new().center(), 1.0)
 }
