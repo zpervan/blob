@@ -1,9 +1,7 @@
-# Image Processing Exercise #
+# Blob - Image editing application #
 [![Ubuntu](https://github.com/zpervan/image_processing_exercise/actions/workflows/ci.yml/badge.svg)](https://github.com/zpervan/image_processing_exercise/actions/workflows/ci.yml)
 
-This repository contains image processing libraries which can be called from the terminal.
-
-![AppExample](assets/app_example.png)
+Blob is an image editing software created in Rust.
 
 ## Setup ## 
 
@@ -17,7 +15,7 @@ Install the following libraries to run the project:
 
 `cargo` command:
 ```shell
-~/image_processing_exercise> cargo run --release
+~/blob> cargo run --release
 ```
 
 ## Additional ##
