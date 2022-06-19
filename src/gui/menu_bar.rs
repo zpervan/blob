@@ -1,9 +1,8 @@
 use crate::gui::main_window::ApplicationState;
 use druid::{Data, Env, Menu, MenuItem, WindowId};
-use druid::menu::MenuEntry;
 
 pub fn make<T: Data>(_window: Option<WindowId>, _data: &ApplicationState, _env: &Env) -> Menu<T> {
-    let mut base = Menu::empty();
+    let base = Menu::empty();
     base.entry(application()).entry(file())
 }
 

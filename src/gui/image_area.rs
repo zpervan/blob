@@ -1,7 +1,6 @@
 use druid::widget::{Image, SizedBox};
 use druid::widget::{prelude::*, FillStrat};
 use druid::{Color, Data, ImageBuf, WidgetExt};
-use druid::image::ImageBuffer;
 
 use crate::gui::main_window::ApplicationState;
 
@@ -34,8 +33,8 @@ fn render_image(data: &ApplicationState) -> Box<dyn Widget<ApplicationState>> {
         image_data = ImageBuf::from_data(include_bytes!("./../../assets/dyson.png"))
     }
 
-    let mut img = Image::new(image_data.unwrap()).fill_mode(FillStrat::Fill);
-    let mut image_area = SizedBox::new(img);
+    let img = Image::new(image_data.unwrap()).fill_mode(FillStrat::Fill);
+    let image_area = SizedBox::new(img);
 
     image_area.border(Color::grey(0.6), 2.0).center().boxed()
 }
@@ -52,7 +51,7 @@ impl Widget<ApplicationState> for ImageArea {
         self.inner.lifecycle(ctx, event, data, env)
     }
 
-    fn update(&mut self, ctx: &mut UpdateCtx, old_data: &ApplicationState, data: &ApplicationState, env: &Env) {
+    fn update(&mut self, ctx: &mut UpdateCtx, old_data: &ApplicationState, data: &ApplicationState, _env: &Env) {
         if !old_data.same(data) {
             self.render(data);
             ctx.children_changed();

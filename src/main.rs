@@ -8,7 +8,6 @@ use gui::main_window::{ApplicationState, Delegate};
 use gui::menu_bar;
 
 use std::string::String;
-use druid::Target::Window;
 
 fn main() {
     let main_window = WindowDesc::new(gui::main_window::build())

@@ -1,5 +1,5 @@
 use druid::widget::{Button, Flex, Label};
-use druid::{FileDialogOptions, UnitPoint, Widget, WidgetExt};
+use druid::{UnitPoint, Widget, WidgetExt};
 
 use crate::ApplicationState;
 

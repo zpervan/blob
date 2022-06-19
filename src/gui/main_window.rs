@@ -1,5 +1,5 @@
 use druid::widget::{Flex, Label};
-use druid::{AppDelegate, Command, Data, Lens, DelegateCtx, Env, Handled, Target, Widget, WidgetExt, FileInfo, WindowDesc, WindowId, WindowHandle};
+use druid::{AppDelegate, Command, Data, Lens, DelegateCtx, Env, Handled, Target, Widget, WidgetExt, WindowDesc, WindowId, WindowHandle};
 
 use crate::gui::image_area::ImageArea;
 use crate::gui::sidebar;
@@ -36,8 +36,8 @@ impl AppDelegate<ApplicationState> for Delegate
 
         if let Some(_about_window) = cmd.get(druid::commands::SHOW_ABOUT)
         {
-            /// todo: Allow showing about window only once.
-            /// Attention: WindowId is private and cannot be assigned as a "about_window_id" in ApplicationState
+            // todo: Allow showing about window only once.
+            // Attention: WindowId is private and cannot be assigned as a "about_window_id" in ApplicationState
             ctx.new_window(show_about());
 
             return Handled::Yes;
