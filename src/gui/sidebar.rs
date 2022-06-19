@@ -21,17 +21,6 @@ fn make_generators_section() -> impl Widget<ApplicationState> {
         .with_spacer(20.0)
 }
 
-fn make_image_section() -> impl Widget<ApplicationState> {
-    Flex::column()
-        .with_child(Label::new("IMAGE"))
-        .with_child(
-            Flex::row()
-                .with_child(Button::new("Crop").padding(5.0))
-                .with_child(Button::new("Rotate").padding(5.0))
-        )
-        .with_spacer(20.0)
-}
-
 fn make_pixel_section() -> impl Widget<ApplicationState> {
     Flex::column()
         .with_child(Label::new("PIXEL MANIPULATION"))
@@ -48,7 +37,6 @@ pub fn make() -> impl Widget<ApplicationState> {
     Flex::column()
         .with_child(make_filters_section())
         .with_child(make_generators_section())
-        .with_child(make_image_section())
         .with_child(make_pixel_section())
         .align_horizontal(UnitPoint::LEFT)
 }

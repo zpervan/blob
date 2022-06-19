@@ -1,5 +1,6 @@
 use druid::widget::{Flex, Label};
 use druid::{AppDelegate, Command, Data, Lens, DelegateCtx, Env, Handled, Target, Widget, WidgetExt, WindowDesc, WindowId, WindowHandle};
+use crate::gui::commands::blob_commands;
 
 use crate::gui::image_area::ImageArea;
 use crate::gui::sidebar;
@@ -34,13 +35,23 @@ impl AppDelegate<ApplicationState> for Delegate
             return Handled::Yes;
         }
 
-        if let Some(_about_window) = cmd.get(druid::commands::SHOW_ABOUT)
+        if let Some(_) = cmd.get(druid::commands::SHOW_ABOUT)
         {
             // todo: Allow showing about window only once.
             // Attention: WindowId is private and cannot be assigned as a "about_window_id" in ApplicationState
             ctx.new_window(show_about());
 
             return Handled::Yes;
+        }
+
+        if let Some(_) = cmd.get(blob_commands::SHOW_CROP)
+        {
+            ctx.new_window(show_crop());
+        }
+
+        if let Some(_) = cmd.get(blob_commands::SHOW_ROTATE)
+        {
+            ctx.new_window(show_crop());
         }
 
         Handled::No
@@ -66,6 +77,7 @@ pub fn build() -> impl Widget<ApplicationState> {
         .with_flex_child(ImageArea::new().center(), 1.0)
 }
 
+// todo: Move show into separate file
 fn show_about() -> WindowDesc<ApplicationState> {
     let label = Label::new("This is an application for image processing thingies.")
         .with_text_size(20.0);
@@ -73,4 +85,24 @@ fn show_about() -> WindowDesc<ApplicationState> {
     let about_content = Flex::column().with_child(label);
 
     WindowDesc::new(about_content).title("About").window_size((250.0, 250.0))
+}
+
+// todo: Move show into separate file
+fn show_crop() -> WindowDesc<ApplicationState> {
+    let label = Label::new("Cropping thingies")
+        .with_text_size(20.0);
+
+    let about_content = Flex::column().with_child(label);
+
+    WindowDesc::new(about_content).title("Crop").window_size((250.0, 250.0))
+}
+
+// todo: Move show into separate file
+fn show_rotate() -> WindowDesc<ApplicationState> {
+    let label = Label::new("Rotate thingies")
+        .with_text_size(20.0);
+
+    let about_content = Flex::column().with_child(label);
+
+    WindowDesc::new(about_content).title("Rotate").window_size((250.0, 250.0))
 }

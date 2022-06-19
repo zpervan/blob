@@ -12,7 +12,7 @@ use std::string::String;
 fn main() {
     let main_window = WindowDesc::new(gui::main_window::build())
         .menu(menu_bar::make)
-        .title("Image Processing Application")
+        .title("Blob - Image editing software")
         .window_size((constants::DEFAULT_WINDOW_WIDTH, constants::DEFAULT_WINDOW_HEIGHT));
 
     let application_state = ApplicationState
