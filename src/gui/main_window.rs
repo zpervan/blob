@@ -51,7 +51,7 @@ impl AppDelegate<ApplicationState> for Delegate
 
         if let Some(_) = cmd.get(blob_commands::SHOW_ROTATE)
         {
-            ctx.new_window(show_crop());
+            ctx.new_window(show_rotate());
         }
 
         Handled::No

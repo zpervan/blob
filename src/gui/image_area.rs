@@ -20,19 +20,13 @@ impl ImageArea {
     }
 }
 
-fn render_image(data: &ApplicationState) -> Box<dyn Widget<ApplicationState>> {
-
-    let image_data;
-
-    if !data.image_path.is_empty()
+fn render_image(data: &ApplicationState) -> Box<dyn Widget<ApplicationState>>{
+    if data.image_path.is_empty()
     {
-        image_data = ImageBuf::from_file(&data.image_path);
-    }
-    else
-    {
-        image_data = ImageBuf::from_data(include_bytes!("./../../assets/dyson.png"))
+        return SizedBox::empty().boxed();
     }
 
+    let image_data =  ImageBuf::from_file(&data.image_path);
     let img = Image::new(image_data.unwrap()).fill_mode(FillStrat::Fill);
     let image_area = SizedBox::new(img);
 
